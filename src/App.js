@@ -1,11 +1,13 @@
 import './App.css';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Header from './components/Header';
 import ContactForm from './components/ContactForm';
 import Contact from './components/Contact';
 import Grid from "@mui/material/Grid";
-import { Box } from "@mui/material";
 import dataContact from './data/contacts.json';
+import { Container } from '@mui/system';
+import List from "@mui/material/List";
+import Divider from "@mui/material/Divider";
 
 // Uncomment untuk memuat daftar kontak
 // import contactsJSON from './data/contacts.json';
@@ -19,26 +21,43 @@ const App = () => {
   const [contacts, setDataContact] = useState(dataContact);
 
   const tambahContact = (arrayDataContact) => {
-    const objectContactBaru = {
-      "name"  : arrayDataContact.nama,
-      "phone" : arrayDataContact.nomorHp,
+    const objectContactBaru = 
+      {"name"  : arrayDataContact.name,
+      "phone" : arrayDataContact.phone,
       "email" : arrayDataContact.email,
-      "photo" : arrayDataContact.photo
-    }
-
+      "photo" : arrayDataContact.photo}
     setDataContact([...contacts, objectContactBaru]);
   }
 
   return (
     <div className="App">
-      <Header />
+      <Container>
+        <Header />
+        <Grid container spacing={4}>
+          <Grid item xs={6} md={6}> 
+            <ContactForm fnTambahDataContact={tambahContact}/>
+          </Grid>
+          <Grid item xs={6} md={6}>
+            <List sx={{ width: "100%", maxWidth: 500, bgcolor: "aquamarine", marginTop: 4}}>
+              {contacts.map((data, index) => {
+                  return(
+                    <div key={index}>
+                      <Contact data={data}/>
+                      <Divider variant="inset" component="li" /> 
+                    </div> 
+                  )
+              })}
+            </List>
+          </Grid>
+        </Grid>
+      </Container>
       
-      <Box sx={{ flexGrow: 1 }}>
+      {/*<Box sx={{ flexGrow: 1 } <Contact data={contacts}/> }>
       <Grid container spacing={2}>
         <Grid item xs={6}><ContactForm fnTambahDataContact={tambahContact}/></Grid>
         <Grid item xs={6}><Contact data={contacts}/></Grid>
       </Grid>
-      </Box>
+      </Box>*/}
     </div>
   );
 };

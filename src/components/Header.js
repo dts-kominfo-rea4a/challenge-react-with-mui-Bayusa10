@@ -10,15 +10,8 @@ import Divider from '@mui/material/Divider';
 const Header = () => {
   return (
     <>
-      <header>
         <Typography mt={4} variant="h3"> Call a Friend </Typography>
-      </header>
-
-      <header>
-        <Typography mt={1}> 
-          <Divider> Your friendly contact app </Divider>
-        </Typography>
-      </header> 
+        <Divider> Your friendly contact app </Divider>
     </>
   );
 };

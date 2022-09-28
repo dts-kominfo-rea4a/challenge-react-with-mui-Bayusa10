@@ -3,10 +3,8 @@
 // dan Card
 // https://mui.com/material-ui/react-card/#basic-card
 import React, { useState } from "react";
-import Box from "@mui/system/Box";
-import { TextField } from "@mui/material";
+import { Card, CardContent, CardActions, Button, TextField } from "@mui/material";
 import FormControl from "@mui/material/FormControl";
-import Button from "@mui/material/Button";
 
 const ContactForm = ({ fnTambahDataContact }) => {
   // Form berisi name, phone, email, dan photo url
@@ -14,7 +12,7 @@ const ContactForm = ({ fnTambahDataContact }) => {
 
   //tampung value dari input ke dalam sebuah state
   const [inputData, setInputData] = useState(
-    {nama : "", nomorHp : "", email : "", photo : ""}
+      {name : "", phone : "", email : "", photo : ""}
   );
 
   const formInputOnChangeHandler = (event) =>{
@@ -29,80 +27,81 @@ const ContactForm = ({ fnTambahDataContact }) => {
   const formSubmitHandler = (event) => {
     event.preventDefault();
     fnTambahDataContact(inputData);
-    setInputData({
-        nama : "", nomorHp : "", email : "", photo : ""
-    })
+    setInputData({name : "", phone : "", email : "", photo : ""})
   }
 
 
   return (
     <>
-      <Box
+      <Card
         sx={{
           width: 500,
           height: "auto",
           backgroundColor: "#FAEBD7",
-          flexGrow: 1,
-          marginLeft: 10,
           marginTop: 4,
         }}
       >
         <form onSubmit={formSubmitHandler}>
-          <FormControl sx={{ m: 2, width: "50ch" }}>
-            <TextField 
+          <CardContent>
+            <FormControl sx={{ m: 2, width: "50ch" }}>
+              <TextField 
                 required 
-                id="input-nama"
-                name="nama" 
-                label="Name" 
+                id="filled-basic"
                 variant="filled" 
-                value={inputData.nama}
+                label="Name"
+                name="name" 
+                value={inputData.name}
                 onChange={formInputOnChangeHandler}
-            />
-          </FormControl>
+              />
+            </FormControl>
 
-          <FormControl sx={{ m: 2, width: "50ch" }}>
-            <TextField
-              required
-              id="input-nomor-hp"
-              name="nomorHp" 
-              label="Phone"
-              variant="filled"
-              value={inputData.nomorHp}
-              onChange={formInputOnChangeHandler}
-            />
-          </FormControl>
+            <FormControl sx={{ m: 2, width: "50ch" }}>
+              <TextField
+                required
+                id="input-nomor-hp"
+                name="phone" 
+                label="Phone"
+                variant="filled"
+                value={inputData.phone}
+                onChange={formInputOnChangeHandler}
+              />
+            </FormControl>
 
-          <FormControl sx={{ m: 2, width: "50ch" }}>
-            <TextField
-              required
-              id="input-email"
-              name="email" 
-              label="Email"
-              variant="filled"
-              value={inputData.email}
-              onChange={formInputOnChangeHandler}
-            />
-          </FormControl>
+            <FormControl sx={{ m: 2, width: "50ch" }}>
+              <TextField
+                required
+                id="input-email"
+                name="email" 
+                label="Email"
+                variant="filled"
+                value={inputData.email}
+                onChange={formInputOnChangeHandler}
+              />
+            </FormControl>
 
-          <FormControl sx={{ m: 2, width: "50ch" }}>
-            <TextField
-              required
-              id="input-photo"
-              name="photo" 
-              label="Photo URL"
-              variant="filled"
-              value={inputData.photo}
-              onChange={formInputOnChangeHandler}
-            />
-          </FormControl>
+            <FormControl sx={{ m: 2, width: "50ch" }}>
+              <TextField
+                required
+                id="input-photo"
+                name="photo" 
+                label="Photo URL"
+                variant="filled"
+                value={inputData.photo}
+                onChange={formInputOnChangeHandler}
+              />
+            </FormControl>
 
-          <FormControl sx={{ m: 2, width: "50ch" }}>
-            <Button variant="text" type="submit">
-              ADD NEW
-            </Button>
-          </FormControl>
+          </CardContent>
+          <CardActions>
+            <FormControl sx={{ m: 2, width: "50ch" }}>
+              <Button variant="text" type="submit">
+                ADD NEW
+              </Button>
+            </FormControl>
+          </CardActions>
+          
         </form>
-      </Box>
+      </Card>
     </>
   );
 };
